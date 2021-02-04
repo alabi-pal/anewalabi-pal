@@ -342,5 +342,18 @@ def fetch_token():
     return jsonify(Success={'New token': f"{new_token}"})
 
 
+@app.route('/delete/<string:token>')
+def delete_user(token):
+    user = db.session.query(User).filter_by(token=token).first()
+
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify(Success={'Success':'Successfully deleted the user'}), 200
+
+    else:
+        return jsonify(Error={'Error': 'No such user'}), 404
+
+
 if __name__ == '__main__':
     app.run(debug=True)

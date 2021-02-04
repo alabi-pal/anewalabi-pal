@@ -179,6 +179,24 @@ def renew_license(email):
         return jsonify(error={'Not Found': 'Sorry. No user with that email is on our database'}), 404
 
 
+@app.route('/update_license/<string:email>', methods=['PATCH'])
+def update_license(email):
+    new_start_time = request.args.get('start_time')
+    new_end_time = request.args.get('end_time')
+
+    user = db.session.query(User).filter_by(email=email).first()
+
+    if user:
+        user.start_time = new_start_time
+        user.end_time = new_end_time
+        db.session.commit()
+
+        return jsonify(Success={'Success': 'Successfully changed the license time'}), 200
+
+    else:
+        return jsonify(Error={'error': 'No such user'}), 404
+
+
 @app.route('/check_validity/<string:token>')
 def check_validity(token):
     user = db.session.query(User).filter_by(token=token).first()

@@ -20,6 +20,7 @@ END_TIME = START_TIME + SECONDS_IN_30_DAYS
 
 # User TABLE Configuration
 class User(db.Model):
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(250), unique=True, nullable=False)
     token = db.Column(db.String(250), unique=True, nullable=False)

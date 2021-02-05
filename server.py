@@ -2,12 +2,13 @@ from flask import jsonify, Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from random import choice, shuffle
 import time
+import os
 
 
 app = Flask(__name__)
 
 # Connect to database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -305,15 +306,15 @@ def change_active_status(token):
 @app.route('/generate_token/<int:number>')
 def generate_token(number):
     def generate():
-        letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+        letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't',
                    'u',
-                   'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+                   'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
                    'P',
                    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-        token_letters = [choice(letters) for _ in range(20)]
-        token_numbers = [choice(numbers) for _ in range(12)]
+        token_letters = [choice(letters) for _ in range(5)]
+        token_numbers = [choice(numbers) for _ in range(3)]
 
         token_list = token_letters + token_numbers
         shuffle(token_list)

@@ -48,7 +48,8 @@ class User(db.Model):
             dictionary[column.name] = getattr(self, column.name)
         return dictionary
 
-
+db.create_all()
+    
 @app.route('/')
 def home():
     return '<h1>This is the home page and there is nothing to see here</h1>'

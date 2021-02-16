@@ -20,7 +20,6 @@ END_TIME = START_TIME + SECONDS_IN_30_DAYS
 
 # User TABLE Configuration
 class User(db.Model):
-    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(250), unique=True, nullable=False)
     token = db.Column(db.String(250), unique=True, nullable=False)
@@ -48,8 +47,10 @@ class User(db.Model):
             dictionary[column.name] = getattr(self, column.name)
         return dictionary
 
+
 db.create_all()
-    
+
+
 @app.route('/')
 def home():
     return '<h1>This is the home page and there is nothing to see here</h1>'
@@ -374,6 +375,11 @@ def delete_user(token):
 
     else:
         return jsonify(Error={'Error': 'No such user'}), 404
+
+
+@app.route('/current_time')
+def current_time():
+    return jsonify(Time=f"{int(START_TIME)}")
 
 
 if __name__ == '__main__':

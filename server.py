@@ -382,5 +382,9 @@ def current_time():
     return jsonify(Time=f"{int(START_TIME)}")
 
 
+@app.route('/testing_the_shit')
+def testing_the_shit():
+    return '<h1>Yo! The damn thing worked!</h1>'
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -299,8 +299,6 @@ def change_active_status(token):
     user = db.session.query(User).filter_by(token=token).first()
 
     if user:
-        user.active_status = request.args.get('new_active_status')
-        db.session.commit()
         return jsonify(Success={'Success': "Successfully changed the active status"}), 200
     else:
         return jsonify(Error={'Error': 'No such user with that token'}), 404

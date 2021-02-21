@@ -384,7 +384,7 @@ def current_time():
 
 @app.route('/testing_the_shit')
 def testing_the_shit():
-    return '<h1>Yo! The damn thing worked!</h1>'
+    return '<h1>Wow! The damn thing worked!</h1>'
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -244,11 +244,6 @@ def check_app_status(token):
         return jsonify(error={'Not Found': 'Sorry. No user with that token is on our database'}), 404
 
 
-# Because of a planning error, I will have to make a little retouching on this change_app_status so the app status number will correspond
-# with the app status itself, e.g app8_status will be 8.
-
-# The app is supposed to register with the app number and change it to 1, but things got fucked
-    
 @app.route('/change_app_status/<string:token>', methods=['PATCH'])
 def change_app_status(token):
     user = db.session.query(User).filter_by(token=token).first()
@@ -257,23 +252,23 @@ def change_app_status(token):
         if app_no == 1:
             user.app1_status = 1
         elif app_no == 2:
-            user.app2_status = 2
+            user.app2_status = 1
         elif app_no == 3:
-            user.app3_status = 3
+            user.app3_status = 1
         elif app_no == 4:
-            user.app4_status = 4
+            user.app4_status = 1
         elif app_no == 5:
-            user.app5_status = 5
+            user.app5_status = 1
         elif app_no == 6:
-            user.app6_status = 6
+            user.app6_status = 1
         elif app_no == 7:
-            user.app7_status = 7
+            user.app7_status = 1
         elif app_no == 8:
-            user.app8_status = 8
+            user.app8_status = 1
         elif app_no == 9:
-            user.app9_status = 9
+            user.app9_status = 1
         elif app_no == 10:
-            user.app10_status = 10
+            user.app10_status = 1
         else:
             pass
 
